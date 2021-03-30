@@ -255,25 +255,25 @@ showImg();
 let object1 = {
     name: "Fedja Petroff",
     position: "QA Ingeneer",
-    src: "http://127.0.0.1:5500/slider_pictures/1.jpg"
+    src: "slider_pictures/1.jpg"
 }
 
 let object2 = {
     name: "Nastja Grow",
     position: "Team Lead",
-    src: "http://127.0.0.1:5500/slider_pictures/2.jpg"
+    src: "slider_pictures/2.jpg"
 }
 
 let object3 = {
     name: "Fedja Petroff",
     position: "Member from the hill",
-    src: "http://127.0.0.1:5500/slider_pictures/3.jpg"
+    src: "slider_pictures/3.jpg"
 }
 
 let object4 = {
     name: "Natasha 3 rublja and our",
     position: "Call girl",
-    src: "http://127.0.0.1:5500/slider_pictures/4.jpg"
+    src: "slider_pictures/4.jpg"
 }
 
 function choiceOfUser(object){
@@ -283,22 +283,22 @@ function choiceOfUser(object){
     let nameOfUser = document.querySelector(".sayabout__name");
     let positionOfUser = document.querySelector(".sayabout__position");
 
-    if (object.src == object1.src) {
+    if (object.src.slice(-21) == object1.src) {
         bigFoto.src = object1.src; 
         nameOfUser.innerHTML = object1.name;
         positionOfUser.innerHTML = object1.position;
     }
-    if (object.src == object2.src) {
+    if (object.src.slice(-21) == object2.src) {
         bigFoto.src = object2.src; 
         nameOfUser.innerHTML = object2.name;
         positionOfUser.innerHTML = object2.position;
     }
-    if (object.src == object3.src) {
+    if (object.src.slice(-21) == object3.src) {
         bigFoto.src = object3.src; 
         nameOfUser.innerHTML = object3.name;
         positionOfUser.innerHTML = object3.position;
     }
-    if (object.src == object4.src) {
+    if (object.src.slice(-21) == object4.src) {
         bigFoto.src = object4.src; 
         nameOfUser.innerHTML = object4.name;
         positionOfUser.innerHTML = object4.position;
