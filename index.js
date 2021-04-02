@@ -1,37 +1,31 @@
 // Our Services _ _ _ _ _ _ _ _ _ _ _ _ _ _ start
 
-
-function removeHide(id) {
-    
-    let elem = document.getElementById(`${id}`);
-    elem.classList.remove('hidden');
-            
-}
-
 let ul = document.getElementById(`services__list`);
 
 ul.addEventListener("click", (event) => {
     if (event.target.tagName != "LI") return;
-
     else {
-        console.log(event.target);
-        select(event.target);        
-    }
+        console.log("123=",event.target);
+        select(event.target);      
+        event.target.setAttribute  
+        }
 });
 
+function removeHide(id) {    
+    let elem = document.getElementById(`${id}`);
+    elem.classList.remove('hidden');            
+}
 
 function select(li) {
     let selected = ul.querySelectorAll('.active');
     for (let elem of selected) {
         elem.classList.remove('active');
         document.getElementById(`${elem.classList[0]}`).classList.add('hidden');
+        console.log(`elem.classList = ${elem.classList}`);
     }
 let spanSelected = ul.querySelectorAll('span');
 for (let elem of spanSelected) {
-    elem.classList.add('hidden');
-    
-}
-
+    elem.classList.add('hidden');}
     li.classList.add('active');
     removeHide(li.classList[0]);
     li.querySelector('span').classList.remove('hidden');
@@ -42,7 +36,8 @@ for (let elem of spanSelected) {
 // Our Amazing Work _ _ _ _ _ _ _ _ _ _ _ _ _ _ start
 
 let buttonMore = document.getElementsByClassName(`work__more`);
-
+let ulWork =document.getElementById('ul__work');
+let workExample=document.getElementById("work__example");
 
 buttonMore[0].addEventListener("click", () => {
     let img1 = document.createElement('img');
@@ -82,6 +77,7 @@ buttonMore[0].addEventListener("click", () => {
     img11.src="img/graphic_design/graphic_design11.jpg";
     img12.src="img/graphic_design/graphic_design12.jpg";
     let imgContainer = document.getElementsByClassName(`work__example`);
+    let addCategory = [...ulWork.getElementsByClassName('active')];
     imgContainer[0].append(img1);
     imgContainer[0].append(img2);
     imgContainer[0].append(img3);
@@ -94,60 +90,59 @@ buttonMore[0].addEventListener("click", () => {
     imgContainer[0].append(img10);
     imgContainer[0].append(img11);
     imgContainer[0].append(img12);
-    
+showImgWork(addCategory[0].id);
 buttonMore[0].remove();
 });
 
-let ulWork =document.getElementById('ul__work');
-
-function selectUl(li) {
-    let selected = ulWork.querySelectorAll('.active');
-    for (let elem of selected) {
-        elem.classList.remove('active');
-        // document.getElementById(`${elem.classList[0]}`).classList.add('hidden');
-    }
-
-    li.classList.add('active');
-    // removeHide(li.classList[0]);
-    
-}
-
 ulWork.addEventListener("click", (event) => {
     if (event.target.tagName != "LI") return;
-
     else {
         console.log(event.target);
         selectUl(event.target);   
-        showImgWork(event.target.id);     
-    }
-})
+        showImgWork(event.target.id);}
+});
+
+workExample.addEventListener('mouseover', (event) => {
+if (event.target.tagName != "IMG") return;
+else {
+        let srcImg = event.target.src;
+        event.target.src ="img/hover.png";
+        workExample.addEventListener("mouseout", (event) => {
+        event.target.src =srcImg;})
+    }})
+
+function selectUl(li) {
+    let selected = ulWork.querySelector('.active');  
+    console.log("selected=",selected);  
+    selected.classList.remove('active');
+    li.classList.add('active');}
 
 function showImgWork(id){    
     let imgWork = document.getElementById('work__example');
-    let selected = imgWork.querySelectorAll('.active');
-    for (let elem of selected) {
-        elem.classList.remove('active');
-        }
-        let category = [...document.querySelectorAll(`.${id}`)];
-    
-    category.forEach(function(elem){
-        elem.classList.add('active');}) 
-        
-}
+    let selected = [...imgWork.querySelectorAll('.active')];
+    selected.forEach((elem) => { elem.classList.remove('active')});        
+    let category = [...document.querySelectorAll(`.${id}`)];    
+    category.forEach((elem)=>{elem.classList.add('active');})         
+};
+
 // Our Amazing Works _ _ _ _ _ _ _ _ _ _end
 
 // Sayabout _ _ _ _ _ _ _ _ _ _ _ _ _ _start
 
 let imgSlade = document.querySelectorAll(".image");
 let imgLink = [];
+let step = 0;
+let offset = 0;
+let divNext = document.createElement('div');
+let imgNext = document.createElement('img');
+document.querySelector('.next').onclick = slideNext;
+document.querySelector('.previous').onclick = slidePrevious;
+showImg();    
+
 
 for (let i = 0; i < imgSlade.length; i++) {
     imgLink[i] = imgSlade[i].src;
 }
-
-
-let step = 0;
-let offset = 0;
 
 function showImg() {
     let divPrevious = document.createElement('div');
@@ -155,44 +150,39 @@ function showImg() {
     divPrevious.classList.add('image-previous');
     divPrevious.setAttribute('type', 'previous');
     let imgPrevious = document.createElement('img');    
-    imgPrevious.src = imgLink[imgSlade.length - 1];  
+    imgPrevious.src = imgLink[(imgSlade.length - 1)]; 
+    console.log("1=",imgLink[3]); 
+    console.log("12=",imgLink);
     let divNext = document.createElement('div'); 
     divNext.classList.add('image__slider');
     divNext.classList.add('image-next');
     divNext.setAttribute('type', 'next');
     let imgNext = document.createElement('img');
-    imgNext.src = imgLink[step + 1];    
+    console.log("2=",imgLink[1]);
+    imgNext.src = imgLink[(step+1)];    
     divPrevious.style.left = offset * 215 - 215 + 'px';
     divNext.style.left = offset * 215 + 860 + 'px';
     document.querySelector('.container').prepend(divPrevious);
-    document.querySelector('.image-previous').appendChild(imgPrevious);
+    document.querySelector('.image-previous').prepend(imgPrevious);
     document.querySelector('.container').append(divNext);
     document.querySelector('.image-next').append(imgNext);
 }
 
-
 function slideNext() {
-
     document.querySelector('.next').onclick = null;
     let imgOverflow = document.querySelectorAll('.image__slider');
-
     if (step > imgLink.length - 1) {
-        step = 0;
-    }
-console.log("imgOverflow=",imgOverflow);
+        step = 0;}
+
     let offset2 = 0;
     for (let i = 0; i < imgOverflow.length; i++) {
         imgOverflow[i].style.left = offset2 * 215-430 + 'px';
         offset2++;
         imgOverflow[i].removeAttribute('type');
-        imgOverflow[i].classList.remove('image-next');
-   
-    }
-
+        imgOverflow[i].classList.remove('image-next');}
     let divNext = document.createElement('div');
     let imgNext = document.createElement('img');
     imgNext.src = imgLink[step];
-
     setTimeout(function() {
         divNext.classList.add('image__slider');
         divNext.classList.add('image-next');
@@ -203,32 +193,24 @@ console.log("imgOverflow=",imgOverflow);
         imgOverflow[0].remove();
         document.querySelector('.next').onclick = slideNext;
     }, 1000);
-
     step++;
 }
 
 function slidePrevious() {
     document.querySelector('.previous').onclick = null;
     let imgOverflow = document.querySelectorAll('.image__slider');
-
     if (step == imgLink.length) {
         step = 0;
     }
-
     if (step < 0) {
         step = 3;
     }
-
-
-
     let offset2 = 0;
-    for (let i = 0; i < imgOverflow.length; i++) {
-      
+    for (let i = 0; i < imgOverflow.length; i++) {      
         imgOverflow[i].style.left = offset2 * 215 + 'px';
         offset2++;
         imgOverflow[i].removeAttribute('type');
-        imgOverflow[i].classList.remove('image-previous');
-        
+        imgOverflow[i].classList.remove('image-previous');        
     }
 
     let divPrevious = document.createElement('div');
@@ -248,66 +230,20 @@ function slidePrevious() {
     step--;
 }
 
-document.querySelector('.next').onclick = slideNext;
-document.querySelector('.previous').onclick = slidePrevious;
-showImg();
-
-let object1 = {
-    name: "Fedja Petroff",
-    position: "QA Ingeneer",
-    src: "slider_pictures/1.jpg"
-}
-
-let object2 = {
-    name: "Nastja Grow",
-    position: "Team Lead",
-    src: "slider_pictures/2.jpg"
-}
-
-let object3 = {
-    name: "Fedja Petroff",
-    position: "Member from the hill",
-    src: "slider_pictures/3.jpg"
-}
-
-let object4 = {
-    name: "Natasha 3 rublja and our",
-    position: "Call girl",
-    src: "slider_pictures/4.jpg"
-}
-
 function choiceOfUser(object){
-
-
     let bigFoto = document.querySelector(".sayabout__foto");
     let nameOfUser = document.querySelector(".sayabout__name");
     let positionOfUser = document.querySelector(".sayabout__position");
-
-    if (object.src.slice(-21) == object1.src) {
-        bigFoto.src = object1.src; 
-        nameOfUser.innerHTML = object1.name;
-        positionOfUser.innerHTML = object1.position;
-    }
-    if (object.src.slice(-21) == object2.src) {
-        bigFoto.src = object2.src; 
-        nameOfUser.innerHTML = object2.name;
-        positionOfUser.innerHTML = object2.position;
-    }
-    if (object.src.slice(-21) == object3.src) {
-        bigFoto.src = object3.src; 
-        nameOfUser.innerHTML = object3.name;
-        positionOfUser.innerHTML = object3.position;
-    }
-    if (object.src.slice(-21) == object4.src) {
-        bigFoto.src = object4.src; 
-        nameOfUser.innerHTML = object4.name;
-        positionOfUser.innerHTML = object4.position;
-    }
+console.log(users);
+let userObj = users.filter(obj => {return obj.src == object.src.slice(-21)});
+let userObjInObj = userObj.reduce((result, item) => { result = item; return result;}, {});
+        bigFoto.src = userObjInObj.src; 
+        nameOfUser.innerHTML = userObjInObj.name;
+        positionOfUser.innerHTML = userObjInObj.position;
 } 
 let userChoice = document.getElementById("sayabout__slider");
 userChoice .addEventListener("click", (event) => {
     if (event.target.tagName != "IMG") return;
-
     else {
     choiceOfUser(event.target);   
     }
