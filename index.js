@@ -137,12 +137,28 @@ let divNext = document.createElement('div');
 let imgNext = document.createElement('img');
 document.querySelector('.next').onclick = slideNext;
 document.querySelector('.previous').onclick = slidePrevious;
-showImg();    
-
+let users=[
+    {   name: "Hassan Ali",
+        position: "QA Ingeneer",
+        src: "slider_pictures/1.jpg"},
+    
+    {   name: "Nastja Grow",
+        position: "Team Lead",
+        src: "slider_pictures/2.jpg"},
+    
+    {   name: "Fedja Petroff",
+        position: "Member from the hill",
+        src: "slider_pictures/3.jpg"},
+    
+    {   name: "Natasha 3 rublja and our",
+        position: "Call girl",
+        src: "slider_pictures/4.jpg"},
+    ];
 
 for (let i = 0; i < imgSlade.length; i++) {
     imgLink[i] = imgSlade[i].src;
 }
+showImg();  
 
 function showImg() {
     let divPrevious = document.createElement('div');
@@ -159,7 +175,7 @@ function showImg() {
     divNext.setAttribute('type', 'next');
     let imgNext = document.createElement('img');
     console.log("2=",imgLink[1]);
-    imgNext.src = imgLink[(step+1)];    
+    imgNext.src = imgLink[(step)];    
     divPrevious.style.left = offset * 215 - 215 + 'px';
     divNext.style.left = offset * 215 + 860 + 'px';
     document.querySelector('.container').prepend(divPrevious);
