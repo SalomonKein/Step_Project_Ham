@@ -147,11 +147,11 @@ let users=[
         src: "slider_pictures/2.jpg"},
     
     {   name: "Fedja Petroff",
-        position: "Member from the hill",
+        position: "Frond End developer",
         src: "slider_pictures/3.jpg"},
     
-    {   name: "Natasha 3 rublja and our",
-        position: "Call girl",
+    {   name: "Natalia Show",
+        position: "QA Ingeneer"",
         src: "slider_pictures/4.jpg"},
     ];
 
